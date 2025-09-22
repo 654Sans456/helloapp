@@ -1,0 +1,8 @@
+bin
+obj
+.vs
+.git
+*.md
+*.user
+*.suo
+node_modules
