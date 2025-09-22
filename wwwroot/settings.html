@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/mainStyle.css">
+        <link rel="stylesheet" href="css/settings.css">
+
+        <title>Настройки</title>
+    </head>
+
+    <body>
+        <div class="container">
+            <h1>Настройки игры</h1>
+
+            <form id="settingsForm">
+                <div class="form-group">
+                    <label for="bgColor">Цвет фона:</label>
+                    <input type="color" id="bgColor" name="bgColor">
+                </div>
+
+                <div class="form-group">
+                    <label for="textColor">Цвет текста:</label>
+                    <input type="color" id="textColor" name="textColor">
+                </div>
+
+                <div class="form-group">
+                    <label for="btnColor">Цвет кнопок:</label>
+                    <input type="color" id="btnColor" name="btnColor">
+                </div>
+
+                <button type="submit">Сохранить</button>
+            </form>
+
+            <button class="back-button" onclick="window.location.href='/'">Назад в меню</button>
+        </div>
+
+        <script src="js/settings.js"></script>
+        <script src="js/theme.js"></script>
+    </body>
+</html>

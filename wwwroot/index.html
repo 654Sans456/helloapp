@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/mainStyle.css">
+        <link rel="stylesheet" href="css/index.css">
+
+        <title>
+            Игровое поле
+        </title>
+    </head>
+
+    <body>
+        <div class="container">
+            <h1>Игра Cапёр</h1>
+
+            <div class="controls">
+                <div class="buttons">
+                    <button id="restart-btn">Новая игра</button>
+                    <button id="settings-btn">Настройки</button>
+                    <button id="results-btn">Результаты</button>
+                </div>
+                <div class="info-panel">
+                    <span>Флаги: <span id="flags-count">40</span></span>
+                    <span>Время: <span id="game-time">0</span> сек</span>
+                    <span id="game-status">Готов к игре</span>
+                </div>
+            </div>
+
+            <div id="game-board" class="game-board">
+                <!-- Игровое поле будет сгенерировано через js/index.js -->
+            </div>
+        </div>
+
+        <div id="settings-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Настройки игры</h2>
+
+                <div class="settings-form">
+                    <div class="form-group">
+                        <label for="width-input">Ширина поля:</label>
+                        <input type="number" id="width-input" min="5" max="30" value="16">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="height-input">Высота поля:</label>
+                        <input type="number" id="height-input" min="5" max="30" value="16">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mines-input">Количество мин:</label>
+                        <input type="number" id="mines-input" min="1" max="500" value="40">
+                    </div>
+
+                    <div class="difficulty-info">
+                        <span>Сложность: </span>
+                        <span id="difficulty-text">Нормально</span>
+                    </div>
+
+                    <button id="apply-settings">Применить настройки</button>
+                </div>
+            </div>
+        </div>
+
+        <script src="js/index.js"></script>
+        <script src="js/theme.js"></script>
+    </body>
+</html>

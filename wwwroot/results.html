@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/mainStyle.css">
+        <link rel="stylesheet" href="css/results.css">
+
+        <title>Результаты игр</title>
+    </head>
+
+    <body>
+        <div class="container">
+            <h1>Результаты игр в Сапёр</h1>
+
+            <div class="controls">
+                <button onclick="window.location.href='gameZone'">Назад к игре</button>
+            </div>
+
+            <table id="results-table">
+                <thead>
+                    <tr>
+                        <th>Игрок</th>
+                        <th>Результат</th>
+                        <th>Время</th>
+                        <th>Размер поля</th>
+                        <th>Количество мин</th>
+                        <th>Дата</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Игровое поле будет сгенерировано через js/results.js -->
+                </tbody>
+            </table>
+        </div>
+
+        <script src="js/results.js"></script>
+        <script src="js/theme.js"></script>
+    </body>
+</html>

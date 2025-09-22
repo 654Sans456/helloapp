@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/mainStyle.css">
+
+        <title>Таблица лидеров</title>
+    </head>
+
+    <body>
+        <div class="container">
+            <h1>Лучшие результаты</h1>
+
+            <div id="difficulty-buttons" class="button-group">
+                <button type="button" data-difficulty="Супер легко">Супер легко</button>
+                <button type="button" data-difficulty="Легко">Легко</button>
+                <button type="button" data-difficulty="Просто">Просто</button>
+                <button type="button" data-difficulty="Нормально">Нормально</button>
+                <button type="button" data-difficulty="Сложно">Сложно</button>
+                <button type="button" data-difficulty="Тяжело">Тяжело</button>
+                <button type="button" data-difficulty="Невозможно">Невозможно</button>
+            </div>
+
+
+            <div class="table-container">
+                <table id="leaderboard-table" class="results-table">
+                    <thead>
+                        <tr>
+                            <th>Игрок</th>
+                            <th>Время</th>
+                            <th>Поле</th>
+                            <th>Мины</th>
+                            <th>Дата</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <script src="js/leaderboard.js"></script>
+        <script src="js/theme.js"></script>
+</body>
+</html>

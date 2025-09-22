@@ -1,0 +1,55 @@
+# ---- Build artifacts ----
+bin/
+obj/
+out/
+publish/
+*.exe
+*.dll
+*.pdb
+*.cache
+*.log
+
+# ---- Visual Studio / Rider ----
+.vs/
+.vscode/
+.idea/
+
+# ---- User-specific files ----
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# ---- System ----
+*.swp
+*.DS_Store
+Thumbs.db
+
+# ---- Docker ----
+docker-compose.override.yml
+*.env
+.env.local
+.env.*.local
+
+# ---- Test results / coverage ----
+TestResults/
+*.coverage
+*.coveragexml
+coverage*.json
+*.trx
+
+# ---- Paket / NuGet ----
+packages/
+*.nupkg
+*.snupkg
+*.nuspec
+project.lock.json
+
+# ---- Resharper ----
+_ReSharper*/
+*.DotSettings.user
+
+# ---- Other temp ----
+*.tmp
+*.temp
+*.bak

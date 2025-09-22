@@ -1,0 +1,93 @@
+.game-board {
+    display: grid;
+    gap: 0;
+    margin: 15px auto;
+    background-color: #c0c0c0;
+    padding: 4px;
+    border-radius: 3px;
+    border: 2px solid #808080;
+    width: fit-content;
+}
+
+.cell {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.cell-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-size: cover;
+    box-sizing: border-box;
+}
+
+.cell.hidden .cell-inner {
+    background-image: url('../images/closeBox.png');
+}
+
+.cell.revealed .cell-inner {
+    background-image: url('../images/openBox.png');
+}
+
+.cell-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 16px;
+    height: 16px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.cell.flag .cell-content {
+    background-image: url('../images/flagBox.png');
+}
+
+.cell.mine .cell-content {
+    background-image: url('../images/mineBox.png');
+}
+
+.cell.one .cell-content {
+    background-image: url('../images/oneInBox.png');
+}
+
+.cell.two .cell-content {
+    background-image: url('../images/twoInBox.png');
+}
+
+.cell.three .cell-content {
+    background-image: url('../images/threeInBox.png');
+}
+
+.cell.four .cell-content {
+    background-image: url('../images/fourInBox.png');
+}
+
+.cell.five .cell-content {
+    background-image: url('../images/fiveInBox.png');
+}
+
+.cell.six .cell-content {
+    background-image: url('../images/sixInBox.png');
+}
+
+.cell.seven .cell-content {
+    background-image: url('../images/sevenInBox.png');
+}
+
+.cell.eight .cell-content {
+    background-image: url('../images/eightInBox.png');
+}
+
+.cell.mine.revealed .cell-inner {
+    background-color: #ffcccc;
+}
