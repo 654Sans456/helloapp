@@ -1,4 +1,4 @@
-(function () {
+п»ї(function () {
     function safeParseFieldSize(fieldSize) {
         if (typeof fieldSize === 'string') {
             const cleaned = fieldSize.replace(/\s+/g, '').toLowerCase();
@@ -13,17 +13,17 @@
     }
 
     function calculateDifficulty(width, height, mines) {
-        if (!width || !height) return "Неизвестно";
+        if (!width || !height) return "\u041d\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043d\u043e";
         const totalCells = width * height;
         const minePercentage = (mines / totalCells) * 100;
 
-        if (minePercentage < 10) return "Супер легко";
-        if (minePercentage < 15) return "Легко";
-        if (minePercentage < 20) return "Просто";
-        if (minePercentage < 25) return "Нормально";
-        if (minePercentage < 30) return "Сложно";
-        if (minePercentage < 35) return "Тяжело";
-        return "Невозможно";
+        if (minePercentage < 10) return "РЎСѓРїРµСЂ Р»РµРіРєРѕ";
+        if (minePercentage < 15) return "Р›РµРіРєРѕ";
+        if (minePercentage < 20) return "РџСЂРѕСЃС‚Рѕ";
+        if (minePercentage < 25) return "РќРѕСЂРјР°Р»СЊРЅРѕ";
+        if (minePercentage < 30) return "РЎР»РѕР¶РЅРѕ";
+        if (minePercentage < 35) return "РўСЏР¶РµР»Рѕ";
+        return "РќРµРІРѕР·РјРѕР¶РЅРѕ";
     }
 
     function escapeHtml(str) {
@@ -50,14 +50,17 @@
             if (!resp.ok) throw new Error('HTTP ' + resp.status);
             const data = await resp.json();
             allResults = Array.isArray(data) ? data : [];
+
+            console.log('Р’СЃРµ СЂРµР·СѓР»СЊС‚Р°С‚С‹:', allResults);
+
         } catch (err) {
-            console.error('leaderboard: ошибка загрузки результатов', err);
+            console.error('leaderboard: РѕС€РёР±РєР° Р·Р°РіСЂСѓР·РєРё СЂРµР·СѓР»СЊС‚Р°С‚РѕРІ', err);
             allResults = [];
         }
 
         const tbody = document.querySelector('#leaderboard-table tbody');
         if (!tbody) {
-            console.error('leaderboard: tbody не найден. Убедись, что в HTML есть <table id="leaderboard-table"><tbody></tbody></table>');
+            console.error('leaderboard: tbody РЅРµ РЅР°Р№РґРµРЅ');
             return;
         }
 
@@ -66,40 +69,51 @@
 
             const filtered = allResults.filter(r => {
                 try {
-                    if (!r || !r.IsWin) return false;
+                    console.log('РџСЂРѕРІРµСЂСЏРµРј Р·Р°РїРёСЃСЊ:', r);
 
-                    const parsed = safeParseFieldSize(r.FieldSize);
-                    if (!parsed) return false;
-
-                    if (isNaN(parsed.rows) || isNaN(parsed.cols) || isNaN(r.MinesCount)) {
-                        console.warn('Некорректные данные в записи:', r);
+                    if (!r || !r.isWin) {
+                        console.log('РџСЂРѕРїСѓСЃРєР°РµРј - РЅРµ РїРѕР±РµРґР° РёР»Рё РїСѓСЃС‚Р°СЏ Р·Р°РїРёСЃСЊ');
                         return false;
                     }
 
-                    const diff = calculateDifficulty(parsed.rows, parsed.cols, r.MinesCount);
+                    const parsed = safeParseFieldSize(r.fieldSize);
+                    if (!parsed) {
+                        console.log('РџСЂРѕРїСѓСЃРєР°РµРј - РЅРµ СѓРґР°Р»РѕСЃСЊ СЂР°СЃРїР°СЂСЃРёС‚СЊ fieldSize:', r.fieldSize);
+                        return false;
+                    }
+
+                    if (isNaN(parsed.rows) || isNaN(parsed.cols) || isNaN(r.minesCount)) {
+                        console.warn('РќРµРєРѕСЂСЂРµРєС‚РЅС‹Рµ РґР°РЅРЅС‹Рµ РІ Р·Р°РїРёСЃРё:', r);
+                        return false;
+                    }
+
+                    const diff = calculateDifficulty(parsed.rows, parsed.cols, r.minesCount);
+                    console.log('Р’С‹С‡РёСЃР»РµРЅРЅР°СЏ СЃР»РѕР¶РЅРѕСЃС‚СЊ:', diff, 'РћР¶РёРґР°РµРјР°СЏ:', difficulty);
                     return diff === difficulty;
                 } catch (e) {
-                    console.error('Ошибка при фильтрации записи:', e, r);
+                    console.error('РћС€РёР±РєР° РїСЂРё С„РёР»СЊС‚СЂР°С†РёРё Р·Р°РїРёСЃРё:', e, r);
                     return false;
                 }
             });
 
-            filtered.sort((a, b) => (Number(a.TimeSeconds) || 0) - (Number(b.TimeSeconds) || 0));
+            console.log('РћС‚С„РёР»СЊС‚СЂРѕРІР°РЅРЅС‹Рµ СЂРµР·СѓР»СЊС‚Р°С‚С‹ РґР»СЏ СЃР»РѕР¶РЅРѕСЃС‚Рё', difficulty, ':', filtered);
+
+            filtered.sort((a, b) => (Number(a.timeSeconds) || 0) - (Number(b.timeSeconds) || 0));
             const top = filtered.slice(0, 10);
 
             if (top.length === 0) {
                 const tr = document.createElement('tr');
-                tr.innerHTML = '<td colspan="5" class="no-data">Нет побед в этой сложности</td>';
+                tr.innerHTML = '<td colspan="5" class="no-data">РќРµС‚ РїРѕР±РµРґ РІ СЌС‚РѕР№ СЃР»РѕР¶РЅРѕСЃС‚Рё</td>';
                 tbody.appendChild(tr);
                 return;
             }
 
             for (const r of top) {
-                const name = escapeHtml(r.PlayerName || 'Аноним');
-                const time = formatTime(Number(r.TimeSeconds));
-                const field = escapeHtml(r.FieldSize || '');
-                const mines = escapeHtml(String(r.MinesCount ?? ''));
-                const date = r.GameDate ? escapeHtml(new Date(r.GameDate).toLocaleString()) : '';
+                const name = escapeHtml(r.playerName || 'РђРЅРѕРЅРёРј');
+                const time = formatTime(Number(r.timeSeconds));
+                const field = escapeHtml(r.fieldSize || '');
+                const mines = escapeHtml(String(r.minesCount ?? ''));
+                const date = r.gameDate ? escapeHtml(new Date(r.gameDate).toLocaleString()) : '';
                 const tr = document.createElement('tr');
                 tr.innerHTML = `<td>${name}</td><td>${time}</td><td>${field}</td><td>${mines}</td><td>${date}</td>`;
                 tbody.appendChild(tr);
@@ -108,7 +122,7 @@
 
         const buttons = Array.from(document.querySelectorAll('#difficulty-buttons button[data-difficulty]'));
         if (!buttons.length) {
-            console.warn('leaderboard: кнопки выбора сложности не найдены (#difficulty-buttons button[data-difficulty])');
+            console.warn('leaderboard: РєРЅРѕРїРєРё РІС‹Р±РѕСЂР° СЃР»РѕР¶РЅРѕСЃС‚Рё РЅРµ РЅР°Р№РґРµРЅС‹ (#difficulty-buttons button[data-difficulty])');
         } else {
             buttons.forEach(btn => {
                 btn.addEventListener('click', () => {
@@ -119,12 +133,12 @@
             });
         }
 
-        let defaultBtn = buttons.find(b => b.dataset.difficulty === 'Просто') || buttons[0];
+        let defaultBtn = buttons.find(b => b.dataset.difficulty === 'РџСЂРѕСЃС‚Рѕ') || buttons[0];
         if (defaultBtn) {
             defaultBtn.classList.add('active');
             renderTable(defaultBtn.dataset.difficulty);
         } else {
-            renderTable('Просто');
+            renderTable('РџСЂРѕСЃС‚Рѕ');
         }
     }
 
